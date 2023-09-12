@@ -1,0 +1,25 @@
+.table_container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.crypto_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  th,
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  @media (max-width: 767px) {
+    th,
+    td {
+      padding: 4px;
+    }
+  }
+}
