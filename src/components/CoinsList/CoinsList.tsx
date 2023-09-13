@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 
-import { useAppSelector } from '../../redux/store';
-import { coinsSliceSelector } from '../../redux/slices/coins-slice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { changeSortType, coinsSliceSelector, sortCoins } from '../../redux/slices/coins-slice';
 import { ICoins } from '../../interfaces/coins';
 import { columns } from '../../assets/json/columns';
 
 import styles from './CoinsList.module.scss';
 
 const CoinsList: React.FC = () => {
-  const { items, status } = useAppSelector((state) => coinsSliceSelector(state));
+  const dispatch = useAppDispatch();
+  const { items, status, sortType } = useAppSelector((state) => coinsSliceSelector(state));
+
+  const sortCoinsLocal = useCallback(
+    (type: string) => {
+      dispatch(changeSortType(type));
+      dispatch(sortCoins());
+    },
+    [dispatch, sortType.desc],
+  );
 
   return (
     <>
@@ -18,7 +27,9 @@ const CoinsList: React.FC = () => {
             <thead>
               <tr>
                 {columns.map((column) => (
-                  <th key={column.accessor}>{column.header}</th>
+                  <th key={column.accessor} onClick={() => sortCoinsLocal(column.accessor)}>
+                    {column.header}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -38,7 +49,6 @@ const CoinsList: React.FC = () => {
                           {Number(row[column.accessor as keyof ICoins]).toFixed(2)}
                         </td>
                       )}
-                      {/* {column.accessor === 'add' && <span>add</span>} */}
                     </>
                   ))}
                 </tr>

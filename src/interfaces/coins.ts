@@ -1,4 +1,4 @@
-import { Status } from './commonInterfaces';
+import { Status, SortType } from './commonInterfaces';
 
 export interface ICoins {
   id: string;
@@ -24,5 +24,6 @@ export interface CoinsState {
   baseItems: ICoins[];
   items: ICoins[];
   searchValue: string;
+  sortType: SortType;
   sortTypeDesc: boolean;
 }

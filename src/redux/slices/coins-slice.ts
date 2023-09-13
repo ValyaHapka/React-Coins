@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { AxiosCoins } from '../../axios/axios';
-import { Status } from '../../interfaces/commonInterfaces';
+import { SortTypeEnum, Status } from '../../interfaces/commonInterfaces';
 import { RootState } from '../store';
 import { CoinsState, ICoins, QueryCoins } from '../../interfaces/coins';
 
 export const fetchCoins = createAsyncThunk('coins/fetchCoins', async () => {
   const query = await AxiosCoins.get<QueryCoins>('/assets');
-  console.log(query.data);
 
   return query.data;
 });
@@ -17,48 +16,39 @@ const initialState: CoinsState = {
   baseItems: [],
   items: [],
   searchValue: '',
-  sortTypeDesc: true,
+  sortType: { type: SortTypeEnum.EMPTY, desc: true },
 };
 
 export const coinsSlice = createSlice({
   name: 'coins',
   initialState,
   reducers: {
-    //   sortBooks: (state, action) => {
-    //     state.sortTypeDesc = action.payload;
+    changeSortType: (state, action) => {
+      if (state.sortType.type !== action.payload) {
+        state.sortType = { type: action.payload, desc: true };
+      } else {
+        state.sortType = { type: action.payload, desc: !state.sortType.desc };
+      }
+    },
+    sortCoins: (state) => {
+      function sortItems(type: SortTypeEnum) {
+        if (state.sortType.desc) {
+          return state.items.sort(
+            (a, b) =>
+              (b[type as keyof ICoins] as unknown as number) -
+              (a[type as keyof ICoins] as unknown as number),
+          );
+        }
 
-    //     function sortItems() {
-    //       if (action.payload) {
-    //         return state.items.sort((a, b) => (b.rating as number) - (a.rating as number));
-    //       }
+        return state.items.sort(
+          (a, b) =>
+            (a[type as keyof ICoins] as unknown as number) -
+            (b[type as keyof ICoins] as unknown as number),
+        );
+      }
 
-    //       return state.items.sort((a, b) => (a.rating as number) - (b.rating as number));
-    //     }
-
-    //     state.items = sortItems();
-    //   },
-
-    //   filterBooks: (state, action: PayloadAction<string>) => {
-    //     function filterByCategory() {
-    //       return state.baseItems.filter((book) =>
-    //         book.categories?.some((category: string) => category === action.payload)
-    //       );
-    //     }
-
-    //     function filterBySearch(books: IBooks[]) {
-    //       return books.filter((book) => book.title.toLowerCase().includes(state.searchValue.toLowerCase()));
-    //     }
-
-    //     if (action.payload === 'Все книги') {
-    //       state.items = filterBySearch(state.baseItems);
-    //     }
-
-    //     if (state.searchValue && action.payload !== 'Все книги') {
-    //       state.items = filterBySearch(filterByCategory());
-    //     } else if (!state.searchValue && action.payload !== 'Все книги') {
-    //       state.items = filterByCategory();
-    //     }
-    //   },
+      state.items = sortItems(state.sortType.type);
+    },
 
     setReduxSearchValue: (state, action) => {
       state.searchValue = action.payload;
@@ -82,6 +72,8 @@ export const coinsSlice = createSlice({
     });
   },
 });
+
+export const { changeSortType, sortCoins } = coinsSlice.actions;
 
 export const coinsSliceSelector = (state: RootState) => state.coins;
 
