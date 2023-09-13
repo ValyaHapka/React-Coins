@@ -50,8 +50,20 @@ export const coinsSlice = createSlice({
       state.items = sortItems(state.sortType.type);
     },
 
-    setReduxSearchValue: (state, action) => {
+    searchByName: (state, action) => {
       state.searchValue = action.payload;
+
+      function filterBySearch(coins: ICoins[]) {
+        return coins.filter((coin) =>
+          coin.name.toLowerCase().includes(state.searchValue.toLowerCase()),
+        );
+      }
+
+      if (state.searchValue === '') {
+        state.items = state.baseItems;
+      } else {
+        state.items = filterBySearch(state.baseItems);
+      }
     },
   },
   extraReducers(builder) {
@@ -73,7 +85,7 @@ export const coinsSlice = createSlice({
   },
 });
 
-export const { changeSortType, sortCoins } = coinsSlice.actions;
+export const { changeSortType, sortCoins, searchByName } = coinsSlice.actions;
 
 export const coinsSliceSelector = (state: RootState) => state.coins;
 
