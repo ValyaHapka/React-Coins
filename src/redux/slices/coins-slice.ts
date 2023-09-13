@@ -3,10 +3,20 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosCoins } from '../../axios/axios';
 import { SortTypeEnum, Status } from '../../interfaces/commonInterfaces';
 import { RootState } from '../store';
-import { CoinsState, ICoins, QueryCoins } from '../../interfaces/coins';
+import { CoinsState, FetchCoinsParams, ICoins, QueryCoins } from '../../interfaces/coins';
 
-export const fetchCoins = createAsyncThunk('coins/fetchCoins', async () => {
-  const query = await AxiosCoins.get<QueryCoins>('/assets');
+export const fetchCoins = createAsyncThunk('coins/fetchCoins', async (params: FetchCoinsParams) => {
+  const { currentPage } = params;
+
+  const offsetValidate = () => {
+    if (currentPage === 1) {
+      return 0;
+    } else {
+      return currentPage * 100;
+    }
+  };
+
+  const query = await AxiosCoins.get<QueryCoins>(`/assets?offset=${offsetValidate()}`);
 
   return query.data;
 });
@@ -17,6 +27,7 @@ const initialState: CoinsState = {
   items: [],
   searchValue: '',
   sortType: { type: SortTypeEnum.EMPTY, desc: true },
+  currentPage: 1,
 };
 
 export const coinsSlice = createSlice({
@@ -65,6 +76,10 @@ export const coinsSlice = createSlice({
         state.items = filterBySearch(state.baseItems);
       }
     },
+
+    changePage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchCoins.pending, (state) => {
@@ -85,7 +100,7 @@ export const coinsSlice = createSlice({
   },
 });
 
-export const { changeSortType, sortCoins, searchByName } = coinsSlice.actions;
+export const { changeSortType, sortCoins, searchByName, changePage } = coinsSlice.actions;
 
 export const coinsSliceSelector = (state: RootState) => state.coins;
 

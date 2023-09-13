@@ -25,5 +25,9 @@ export interface CoinsState {
   items: ICoins[];
   searchValue: string;
   sortType: SortType;
-  sortTypeDesc: boolean;
+  currentPage: number;
+}
+
+export interface FetchCoinsParams {
+  currentPage: number;
 }

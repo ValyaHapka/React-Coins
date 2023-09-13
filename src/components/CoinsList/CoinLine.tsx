@@ -20,10 +20,14 @@ const CoinLine: React.FC = () => {
                 <td key={column.accessor}>{row[column.accessor as keyof ICoins]}</td>
               ) : column.accessor === 'add' ? (
                 <td>add</td>
-              ) : (
+              ) : Number(row[column.accessor as keyof ICoins]).toFixed(2) !== '0.00' ? (
                 <td key={column.accessor}>
                   {Number(row[column.accessor as keyof ICoins]).toFixed(2)}
                 </td>
+              ) : Number(row[column.accessor as keyof ICoins]) !== 0 ? (
+                <td key={column.accessor}>{Number(row[column.accessor as keyof ICoins])}</td>
+              ) : (
+                <td key={column.accessor}>--</td>
               )}
             </>
           ))}

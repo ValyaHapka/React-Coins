@@ -7,9 +7,10 @@ export enum Status {
 
 export enum SortTypeEnum {
   EMPTY = '',
-  MARKETCAP = 'marketCap',
-  PRICE = 'price',
+  MARKETCAP = 'marketCapUsd',
+  PRICE = 'priceUsd',
   CHANGE24H = 'changePercent24Hr',
+  RANK = 'rank',
 }
 
 export interface SortType {

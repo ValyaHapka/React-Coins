@@ -1,0 +1,30 @@
+.pagination {
+  li {
+    display: inline-block;
+  }
+  a {
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #1e7bfe;
+    border-radius: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background: #1e7bfe;
+      color: #fff;
+    }
+  }
+
+  :global {
+    .selected {
+      a {
+        background: #1e7bfe;
+        color: #fff;
+      }
+    }
+  }
+}
