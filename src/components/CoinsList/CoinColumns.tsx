@@ -21,6 +21,7 @@ const CoinColumns: React.FC = () => {
   return (
     <thead>
       <tr>
+        <th>{''}</th>
         {columns.map((column) => (
           <th key={column.accessor}>
             <span onClick={() => sortCoinsLocal(column.accessor)}>
