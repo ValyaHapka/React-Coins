@@ -6,9 +6,19 @@ export enum ChartTimeEnum {
   MONTH = '1m',
 }
 
+export interface TimeButtonProps {
+  valueButton: ChartTimeEnum;
+  click: (value: ChartTimeEnum) => void;
+}
+
 export interface HistoryData {
   priceUsd: string;
   time: number;
+}
+
+export interface QueryProps {
+  id: string;
+  interval: string;
 }
 
 export interface QueryHistoryCoinById {

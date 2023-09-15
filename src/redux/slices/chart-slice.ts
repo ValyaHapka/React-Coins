@@ -3,13 +3,23 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosCoins } from '../../axios/axios';
 import { RootState } from '../store';
 import { Status } from '../../interfaces/commonInterfaces';
-import { ChartTimeEnum, HistoryState, QueryHistoryCoinById } from '../../interfaces/historyCoin';
+import {
+  ChartTimeEnum,
+  HistoryState,
+  QueryHistoryCoinById,
+  QueryProps,
+} from '../../interfaces/historyCoin';
 
-export const fetchHistoryByID = createAsyncThunk('coins/fetchHistoryByID', async (id: string) => {
-  const { data } = await AxiosCoins.get<QueryHistoryCoinById>(`/assets/${id}/history?interval=h2`);
+export const fetchHistoryByID = createAsyncThunk(
+  'coins/fetchHistoryByID',
+  async ({ id, interval }: QueryProps) => {
+    const { data } = await AxiosCoins.get<QueryHistoryCoinById>(
+      `/assets/${id}/history?interval=${interval}`,
+    );
 
-  return data;
-});
+    return data;
+  },
+);
 
 const initialState: HistoryState = {
   status: Status.EMPTY,

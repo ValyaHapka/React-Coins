@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { useAppSelector } from '../../redux/store';
+import { useAppSelector } from '../../../redux/store';
+import { TimeButtonProps } from '../../../interfaces/historyCoin';
 
 import styles from './TimeButton.module.scss';
-
-interface TimeButtonProps {
-  valueButton: string;
-  click: (value: string) => void;
-}
 
 const TimeButton: React.FC<TimeButtonProps> = ({ valueButton, click }) => {
   const { chartTime } = useAppSelector((state) => state.history);
