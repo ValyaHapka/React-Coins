@@ -12,7 +12,7 @@ export const fetchCoinsByID = createAsyncThunk('coins/fetchCoinsByID', async (id
 });
 
 const initialState: ActiveCoinState = {
-  status: Status.EMPTY,
+  statusCoin: Status.EMPTY,
   coin: {},
 };
 
@@ -22,15 +22,15 @@ export const activeCoinSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchCoinsByID.pending, (state) => {
-      state.status = Status.LOADING;
+      state.statusCoin = Status.LOADING;
       state.coin = {};
     });
     builder.addCase(fetchCoinsByID.fulfilled, (state, action: PayloadAction<QueryCoinById>) => {
       state.coin = action.payload.data;
-      state.status = Status.LOADED;
+      state.statusCoin = Status.LOADED;
     });
     builder.addCase(fetchCoinsByID.rejected, (state) => {
-      state.status = Status.ERROR;
+      state.statusCoin = Status.ERROR;
       state.coin = {};
     });
   },

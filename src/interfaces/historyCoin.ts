@@ -27,7 +27,7 @@ export interface QueryHistoryCoinById {
 }
 
 export interface HistoryState {
-  status: Status;
+  statusHistory: Status;
   history: HistoryData[];
   chartTime: ChartTimeEnum;
 }

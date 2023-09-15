@@ -22,7 +22,7 @@ export const fetchHistoryByID = createAsyncThunk(
 );
 
 const initialState: HistoryState = {
-  status: Status.EMPTY,
+  statusHistory: Status.EMPTY,
   history: [],
   chartTime: ChartTimeEnum.DAY,
 };
@@ -37,18 +37,18 @@ export const historySlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchHistoryByID.pending, (state) => {
-      state.status = Status.LOADING;
+      state.statusHistory = Status.LOADING;
       state.history = [];
     });
     builder.addCase(
       fetchHistoryByID.fulfilled,
       (state, action: PayloadAction<QueryHistoryCoinById>) => {
         state.history = action.payload.data;
-        state.status = Status.LOADED;
+        state.statusHistory = Status.LOADED;
       },
     );
     builder.addCase(fetchHistoryByID.rejected, (state) => {
-      state.status = Status.ERROR;
+      state.statusHistory = Status.ERROR;
       state.history = [];
     });
   },

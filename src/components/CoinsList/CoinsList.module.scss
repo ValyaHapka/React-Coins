@@ -1,6 +1,6 @@
 .table_container {
   overflow-x: auto;
-  max-width: 100%;
+  width: 95%;
 }
 
 .crypto_table {
@@ -46,10 +46,16 @@
       }
     }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 867px) {
     th,
     td {
       padding: 4px;
+      font-size: 13px;
     }
+  }
+}
+@media (max-width: 767px) {
+  .crypto_table {
+    width: 85%;
   }
 }

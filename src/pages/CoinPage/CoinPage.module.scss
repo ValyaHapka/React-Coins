@@ -5,9 +5,16 @@
   margin-left: 30px;
 }
 
+.loader {
+  position: absolute;
+  top: calc(100vh - 70%);
+  left: calc(90vw - 50%);
+}
+
 .page {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   &_info {
     width: 30%;
     display: flex;
@@ -16,7 +23,6 @@
     align-items: center;
     margin: 0;
     &_common {
-      width: 30%;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -74,9 +80,34 @@
         }
       }
     }
+    @media (max-width: 500px) {
+      &_other {
+        width: 100%;
+      }
+    }
+    @media (max-width: 1025px) {
+      &_common {
+        &_rank {
+          font-size: 16px;
+        }
+        &_logo {
+          width: 20px;
+          height: 20px;
+        }
+        &_name {
+          font-size: 16px;
+        }
+        &_symbol {
+          font-size: 12px;
+        }
+      }
+      &_price {
+        font-size: 30px;
+      }
+    }
   }
   &_chart {
-    width: 60%;
+    width: 70%;
     &_time {
       padding: 3px;
       width: fit-content;
@@ -84,6 +115,21 @@
       gap: 3px;
       border-radius: 6px;
       background-color: rgb(239, 242, 245);
+    }
+  }
+  @media (max-width: 600px) {
+    &_chart {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 951px) {
+  .page {
+    flex-direction: column;
+    gap: 75px;
+    &_info {
+      width: 60%;
     }
   }
 }

@@ -7,6 +7,6 @@ export interface QueryCoinById {
 }
 
 export interface ActiveCoinState {
-  status: Status;
+  statusCoin: Status;
   coin: ICoins | Record<string, never>;
 }

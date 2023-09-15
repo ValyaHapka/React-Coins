@@ -9,7 +9,7 @@ import { ChartTimeEnum } from '../../../interfaces/historyCoin';
 
 const ChartSection: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { history, status, chartTime } = useAppSelector((state) => state.history);
+  const { history, statusHistory, chartTime } = useAppSelector((state) => state.history);
 
   let data: ChartData[] = [];
   const dayData = [...new Array(12)];
@@ -22,7 +22,7 @@ const ChartSection: React.FC = () => {
     dispatch(changeTime(value));
   };
 
-  if (status === 'loaded') {
+  if (statusHistory === 'loaded') {
     switch (chartTime) {
       case '1d':
         data = dayData.map((__, i) => {
@@ -58,7 +58,7 @@ const ChartSection: React.FC = () => {
           return <TimeButton valueButton={el as ChartTimeEnum} click={timeClick} />;
         })}
       </div>
-      {status === 'loaded' && <CoinChart data={data} />}
+      {statusHistory === 'loaded' && <CoinChart data={data} />}
     </section>
   );
 };

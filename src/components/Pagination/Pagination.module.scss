@@ -1,4 +1,7 @@
 .pagination {
+  width: 60%;
+  display: flex;
+  justify-content: center;
   li {
     display: inline-block;
   }
@@ -24,6 +27,19 @@
       a {
         background: #1e7bfe;
         color: #fff;
+      }
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .pagination {
+    margin-right: 25px;
+    li {
+      a {
+        width: 15px;
+        height: 15px;
+        margin-right: 7px;
       }
     }
   }
