@@ -4,9 +4,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import coinsReducer from './slices/coins-slice';
 import activeCoinReducer from './slices/active-coin-slice';
 import historyReducer from './slices/chart-slice';
+import portfolioReducer from './slices/portfolio-slice';
 
 export const store = configureStore({
-  reducer: { coins: coinsReducer, activeCoin: activeCoinReducer, history: historyReducer },
+  reducer: {
+    coins: coinsReducer,
+    activeCoin: activeCoinReducer,
+    history: historyReducer,
+    portfolio: portfolioReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

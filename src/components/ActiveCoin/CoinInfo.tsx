@@ -1,12 +1,16 @@
 import React from 'react';
 
-import { useAppSelector } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { changeAddModal } from '../../redux/slices/portfolio-slice';
 import icon from '../../assets/icons/coin-icon.svg';
 
 import styles from '../../pages/CoinPage/CoinPage.module.scss';
+import AddCoins from '../Portfolio/AddCoin';
 
 const CoinInfo: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { coin } = useAppSelector((state) => state.activeCoin);
+  const { isAddModalOpen } = useAppSelector((state) => state.portfolio);
 
   return (
     <section className={styles.page_info}>
@@ -17,7 +21,14 @@ const CoinInfo: React.FC = () => {
         <span className={styles.page_info_common_symbol}>{coin.symbol}</span>
       </div>
       <h1 className={styles.page_info_price}>${Number(coin.priceUsd).toFixed(2)}</h1>{' '}
-      <button className={styles.page_info_add}>Add to watchlist</button>
+      <button className={styles.page_info_add} onClick={() => dispatch(changeAddModal(true))}>
+        Add
+      </button>
+      {isAddModalOpen && (
+        <AddCoins
+          data={{ name: coin.name, quantity: 0, symbol: coin.symbol, price: +coin.priceUsd }}
+        />
+      )}
       <ul className={styles.page_info_other}>
         <li className={styles.page_info_other_element}>
           <span>Market Cap</span>

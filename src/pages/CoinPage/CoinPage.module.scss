@@ -11,6 +11,24 @@
   left: calc(90vw - 50%);
 }
 
+.error {
+  position: absolute;
+  font-size: 50px;
+  top: calc(100vh - 70%);
+  left: calc(100vw - 50%);
+}
+
+.blur {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(54, 54, 54, 0.3);
+  height: 1000%;
+}
+
 .page {
   display: flex;
   justify-content: space-between;

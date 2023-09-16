@@ -1,0 +1,26 @@
+.add {
+  position: fixed;
+  top: calc(90vh - 50%);
+  left: calc(70vw - 50%);
+  border-radius: 15px;
+  background-color: #ebe4e4;
+  width: 60vw;
+  height: fit-content;
+  &_close {
+    cursor: pointer;
+  }
+  &_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    h6 {
+      margin: 0;
+      font-size: 15px;
+    }
+    button {
+      width: 30%;
+      margin-bottom: 20px;
+    }
+  }
+}

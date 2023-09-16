@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Lottie from 'lottie-react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { changeAddModal, changePortfolioModal } from '../../redux/slices/portfolio-slice';
 import { fetchCoinsByID } from '../../redux/slices/active-coin-slice';
 import { fetchHistoryByID } from '../../redux/slices/chart-slice';
 import CoinInfo from '../../components/ActiveCoin/CoinInfo';
@@ -12,15 +13,25 @@ import back from '../../assets/icons/back.svg';
 import Loader from '../../assets/json/loader.json';
 
 import styles from './CoinPage.module.scss';
+import Header from '../../components/Header/Header';
 
 const CoinPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { chartTime, statusHistory } = useAppSelector((state) => state.history);
   const { statusCoin } = useAppSelector((state) => state.activeCoin);
+  const { isPortfolioModalOpen, isAddModalOpen } = useAppSelector((state) => state.portfolio);
   const navigate = useNavigate();
   const params = useParams();
 
   const coinID = params.coinID as string;
+
+  const clickOverlay = () => {
+    if (isPortfolioModalOpen) {
+      dispatch(changePortfolioModal(false));
+    } else if (isAddModalOpen) {
+      dispatch(changeAddModal(false));
+    }
+  };
 
   useEffect(() => {
     const fetchingData = async () => {
@@ -29,6 +40,14 @@ const CoinPage: React.FC = () => {
 
     fetchingData();
   }, [coinID, dispatch]);
+
+  useEffect(() => {
+    if (isPortfolioModalOpen || isAddModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isPortfolioModalOpen, isAddModalOpen]);
 
   useEffect(() => {
     const queryHistory = async () => {
@@ -47,6 +66,10 @@ const CoinPage: React.FC = () => {
 
   return (
     <>
+      <Header />
+      {(isPortfolioModalOpen || isAddModalOpen) && (
+        <div className={styles.blur} onClick={clickOverlay} />
+      )}
       <img className={styles.back} src={back} onClick={() => navigate('/')} />
       {statusCoin === 'loaded' && statusHistory === 'loaded' && (
         <div className={styles.page}>
@@ -54,7 +77,7 @@ const CoinPage: React.FC = () => {
           <ChartSection />
         </div>
       )}
-
+      {statusCoin === 'error' && <span className={styles.error}>There is no such coin :(</span>}
       {statusHistory === 'loading' && <Lottie animationData={Loader} className={styles.loader} />}
     </>
   );

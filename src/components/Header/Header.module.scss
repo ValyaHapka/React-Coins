@@ -1,0 +1,36 @@
+.header {
+  margin-bottom: 40px;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(243, 243, 243);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &_coins {
+    display: flex;
+    gap: 7px;
+    margin-left: 3vw;
+    &_element {
+      display: flex;
+      gap: 7px;
+      &_name {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      &_price {
+        font-size: 15px;
+        font-weight: 700;
+      }
+    }
+  }
+  &_portfolio {
+    display: flex;
+    margin-right: 3vw;
+    gap: 7px;
+    cursor: pointer;
+    h4 {
+      margin: 0;
+    }
+  }
+}
