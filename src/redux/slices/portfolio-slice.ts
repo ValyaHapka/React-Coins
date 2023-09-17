@@ -20,13 +20,14 @@ export const portfolioSlice = createSlice({
       if (coins.length === 0) {
         coins.push(action.payload);
       } else {
-        coins.forEach((coin) => {
-          if (coins.some((coin) => coin.name === action.payload.name)) {
-            coin.quantity += action.payload.quantity;
-          } else {
-            coins.push(action.payload);
-          }
-        });
+        if (coins.some((coin) => coin.name === action.payload.name)) {
+          const foundedCoin = coins.find((coin) => coin.name === action.payload.name);
+          console.log(action.payload.quantity);
+
+          (foundedCoin as PortfolioCoin).quantity += action.payload.quantity;
+        } else {
+          coins.push(action.payload);
+        }
       }
     },
     addCoinsFromStorage: (state, action) => {
