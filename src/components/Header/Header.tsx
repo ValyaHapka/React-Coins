@@ -31,20 +31,24 @@ const Header: React.FC = () => {
   }, [dispatch, portfolioPrice]);
 
   useEffect(() => {
-    const coinsInPortfolio: PortfolioCoin[] = storagePortfolio.coins.map((coin: PortfolioCoin) => {
-      for (let i = 0; i < baseItems.length; i++) {
-        if (baseItems[i].name === coin.name) {
-          return (coin = { ...coin, price: +baseItems[i].priceUsd });
-        }
-      }
-    });
+    if (storagePortfolio) {
+      const coinsInPortfolio: PortfolioCoin[] = storagePortfolio.coins.map(
+        (coin: PortfolioCoin) => {
+          for (let i = 0; i < baseItems.length; i++) {
+            if (baseItems[i].name === coin.name) {
+              return (coin = { ...coin, price: +baseItems[i].priceUsd });
+            }
+          }
+        },
+      );
 
-    const newPrice = coinsInPortfolio.reduce(
-      (acc, cv: PortfolioCoin) => acc + cv.price * cv.quantity,
-      0,
-    );
+      const newPrice = coinsInPortfolio.reduce(
+        (acc, cv: PortfolioCoin) => acc + cv.price * cv.quantity,
+        0,
+      );
 
-    dispatch(changeDifference(newPrice - portfolioPrice));
+      dispatch(changeDifference(newPrice - portfolioPrice));
+    }
   }, [dispatch, baseItems]);
 
   const topCoins = baseItems.slice(0, 3);
@@ -66,7 +70,9 @@ const Header: React.FC = () => {
           {`${portfolioPrice.toFixed(2)}`}${' '}
           {difference > 0
             ? `+${difference.toFixed(2)} (${percentage(difference, portfolioPrice).toFixed(2)}%)`
-            : `${difference.toFixed(2)} (${percentage(difference, portfolioPrice).toFixed(2)})%`}
+            : difference !== 0 && coins.length > 0
+            ? `${difference.toFixed(2)} (${percentage(difference, portfolioPrice).toFixed(2)})%`
+            : ''}
         </span>
       </div>
       {isPortfolioModalOpen && <Portfolio />}

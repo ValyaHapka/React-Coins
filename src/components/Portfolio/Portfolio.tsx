@@ -16,21 +16,26 @@ const Portfolio: React.FC = () => {
   return (
     <div className={styles.portfolio}>
       <img src={close} onClick={setModal} className={styles.portfolio_close} />
-      <ul className={styles.portfolio_list}>
-        {coins.map((c) => (
-          <li className={styles.portfolio_list_element}>
-            <div className={styles.portfolio_list_element_info}>
-              <h4>{c.name}</h4>
-              <span>{c.symbol}</span>
-              <h5>{c.price.toFixed(2) !== '0.00' ? c.price.toFixed(2) : c.price}</h5>
-            </div>
-            <div className={styles.portfolio_list_element_actions}>
-              <h6>{c.quantity}</h6>
-              <p onClick={() => dispatch(removeCoin(c.name))}>Delete</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {coins.length > 0 ? (
+        <>
+          {coins.map((c) => (
+            <li className={styles.portfolio_list_element}>
+              <div className={styles.portfolio_list_element_info}>
+                <h4>{c.name}</h4>
+                <span>{c.symbol}</span>
+                <h5>{c.price.toFixed(2) !== '0.00' ? c.price.toFixed(2) : c.price}</h5>
+              </div>
+              <div className={styles.portfolio_list_element_actions}>
+                <h6>{c.quantity}</h6>
+                <p onClick={() => dispatch(removeCoin(c.name))}>Delete</p>
+              </div>
+            </li>
+          ))}
+        </>
+      ) : (
+        <h6>Add some coins to your portfolio</h6>
+      )}
+      <ul className={styles.portfolio_list}></ul>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '../store';
 import { PortfolioCoin, PortfolioState } from '../../interfaces/portfolio';
 
 const initialState: PortfolioState = {
@@ -35,6 +34,9 @@ export const portfolioSlice = createSlice({
     },
     removeCoin: (state, action: PayloadAction<string>) => {
       state.coins = state.coins.filter((coin) => coin.name !== action.payload);
+      if (state.coins.length === 0) {
+        localStorage.removeItem('portfolio');
+      }
     },
     changePortfolioModal: (state, action) => {
       state.isPortfolioModalOpen = action.payload;
@@ -53,8 +55,6 @@ export const portfolioSlice = createSlice({
     },
   },
 });
-
-export const portfolioSelector = (state: RootState) => state.portfolio;
 
 export const {
   addCoins,

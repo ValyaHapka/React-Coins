@@ -9,7 +9,7 @@ const AddButton: React.FC<AddCoinProps> = ({ data }) => {
   const dispatch = useAppDispatch();
 
   const click = () => {
-    if (data.quantity) {
+    if (data.quantity > 0 && data.quantity < 5000) {
       dispatch(addCoins(data));
       dispatch(changeAddModal(false));
     }
