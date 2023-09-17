@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { coinsSliceSelector } from '../../redux/slices/coins-slice';
 import { ICoins } from '../../interfaces/coins';
 import { columns } from '../../assets/json/columns';
-import icon from '../../assets/icons/coin-icon.svg';
 import { changeAddModal, chooseCoin } from '../../redux/slices/portfolio-slice';
 import AddCoins from '../Portfolio/AddCoin';
 import { PortfolioCoin } from '../../interfaces/portfolio';
+import { buildLink } from '../../helpers/buildLink';
 
 const CoinLine: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ const CoinLine: React.FC = () => {
         {items.map((row) => (
           <tr key={row.name} onClick={!isAddModalOpen ? () => navigate(path(row.id)) : () => null}>
             <td>
-              <img src={icon} />
+              <img src={buildLink(row.symbol)} />
             </td>
             {columns.map((column) => (
               <>

@@ -56,7 +56,7 @@ const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.header_coins}>
         {topCoins.map((coin) => (
-          <div className={styles.header_coins_element}>
+          <div className={styles.header_coins_element} key={coin.id}>
             <span className={styles.header_coins_element_name}>{coin.name}</span>
             <span className={styles.header_coins_element_price}>
               ${Number(coin.priceUsd).toFixed(2)}

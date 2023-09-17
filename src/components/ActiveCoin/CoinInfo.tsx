@@ -2,10 +2,10 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changeAddModal } from '../../redux/slices/portfolio-slice';
-import icon from '../../assets/icons/coin-icon.svg';
 
 import styles from '../../pages/CoinPage/CoinPage.module.scss';
 import AddCoins from '../Portfolio/AddCoin';
+import { buildLink } from '../../helpers/buildLink';
 
 const CoinInfo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ const CoinInfo: React.FC = () => {
     <section className={styles.page_info}>
       <div className={styles.page_info_common}>
         <span className={styles.page_info_common_rank}>{coin.rank}</span>
-        <img className={styles.page_info_common_logo} src={icon} />
+        <img className={styles.page_info_common_logo} src={buildLink(coin.symbol)} />
         <h3 className={styles.page_info_common_name}>{coin.name}</h3>
         <span className={styles.page_info_common_symbol}>{coin.symbol}</span>
       </div>

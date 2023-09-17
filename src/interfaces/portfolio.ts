@@ -9,7 +9,7 @@ export interface PortfolioState {
   coins: PortfolioCoin[];
   isPortfolioModalOpen: boolean;
   isAddModalOpen: boolean;
-  chosenCoin: PortfolioCoin | null;
+  chosenCoin: PortfolioCoin;
   price: number;
   difference: number;
 }

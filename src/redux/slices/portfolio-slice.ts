@@ -6,7 +6,7 @@ const initialState: PortfolioState = {
   coins: [],
   isPortfolioModalOpen: false,
   isAddModalOpen: false,
-  chosenCoin: null,
+  chosenCoin: { name: '', symbol: '', price: 0, quantity: 0 },
   price: 0,
   difference: 0,
 };

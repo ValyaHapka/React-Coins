@@ -55,7 +55,7 @@ const ChartSection: React.FC = () => {
     <section className={styles.page_chart}>
       <div className={styles.page_chart_time}>
         {timeButtons.map((el) => {
-          return <TimeButton valueButton={el as ChartTimeEnum} click={timeClick} />;
+          return <TimeButton key={el} valueButton={el as ChartTimeEnum} click={timeClick} />;
         })}
       </div>
       {statusHistory === 'loaded' && <CoinChart data={data} />}
