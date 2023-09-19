@@ -3,9 +3,10 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changeAddModal } from '../../redux/slices/portfolio-slice';
 
-import styles from '../../pages/CoinPage/CoinPage.module.scss';
 import AddCoins from '../Portfolio/AddCoin';
 import { buildLink } from '../../helpers/buildLink';
+
+import styles from '../../pages/CoinPage/CoinPage.module.scss';
 
 const CoinInfo: React.FC = () => {
   const dispatch = useAppDispatch();

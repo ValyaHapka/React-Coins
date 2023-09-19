@@ -1,9 +1,10 @@
 import React from 'react';
 
-import styles from './AddButton.module.scss';
 import { AddCoinProps } from '../../interfaces/addCoin';
 import { useAppDispatch } from '../../redux/store';
 import { addCoins, changeAddModal } from '../../redux/slices/portfolio-slice';
+
+import styles from './AddButton.module.scss';
 
 const AddButton: React.FC<AddCoinProps> = ({ data }) => {
   const dispatch = useAppDispatch();

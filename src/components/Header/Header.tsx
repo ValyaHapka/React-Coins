@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-import styles from './Header.module.scss';
 import Portfolio from '../Portfolio/Portfolio';
 import {
   changeDifference,
@@ -9,6 +8,8 @@ import {
   changePrice,
 } from '../../redux/slices/portfolio-slice';
 import { PortfolioCoin } from '../../interfaces/portfolio';
+
+import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();

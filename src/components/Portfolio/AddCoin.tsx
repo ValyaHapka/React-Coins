@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 import close from '../../assets/icons/close-modal.svg';
-
-import styles from './AddCoins.module.scss';
 import { changeAddModal, chooseCoin } from '../../redux/slices/portfolio-slice';
 import AddButton from '../UI/AddButton';
 import { PortfolioCoin } from '../../interfaces/portfolio';
 import { AddCoinProps } from '../../interfaces/addCoin';
+
+import styles from './AddCoins.module.scss';
 
 const AddCoins: React.FC<AddCoinProps> = ({ data }) => {
   const dispatch = useAppDispatch();

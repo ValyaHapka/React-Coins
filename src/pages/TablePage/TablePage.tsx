@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import Lottie from 'lottie-react';
 
+import Header from '../../components/Header/Header';
 import CoinsList from '../../components/CoinsList/CoinsList';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changePage, fetchCoins } from '../../redux/slices/coins-slice';
 import Search from '../../components/Search/Search';
 import Pagination from '../../components/Pagination/Pagination';
 import Loader from '../../assets/json/loader.json';
-
-import styles from './TablePage.module.scss';
-import Header from '../../components/Header/Header';
 import {
   addCoinsFromStorage,
   changeAddModal,
   changePortfolioModal,
 } from '../../redux/slices/portfolio-slice';
+
+import styles from './TablePage.module.scss';
 
 const TablePage = () => {
   const dispatch = useAppDispatch();

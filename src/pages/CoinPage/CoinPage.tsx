@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Lottie from 'lottie-react';
 
+import Header from '../../components/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changeAddModal, changePortfolioModal } from '../../redux/slices/portfolio-slice';
 import { fetchCoinsByID } from '../../redux/slices/active-coin-slice';
@@ -13,7 +14,6 @@ import back from '../../assets/icons/back.svg';
 import Loader from '../../assets/json/loader.json';
 
 import styles from './CoinPage.module.scss';
-import Header from '../../components/Header/Header';
 
 const CoinPage: React.FC = () => {
   const dispatch = useAppDispatch();

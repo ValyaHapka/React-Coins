@@ -1,11 +1,12 @@
 import React from 'react';
 
-import styles from '../../../pages/CoinPage/CoinPage.module.scss';
 import CoinChart, { ChartData } from './CoinChart';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { changeTime } from '../../../redux/slices/chart-slice';
 import TimeButton from './TimeButton';
 import { ChartTimeEnum } from '../../../interfaces/historyCoin';
+
+import styles from '../../../pages/CoinPage/CoinPage.module.scss';
 
 const ChartSection: React.FC = () => {
   const dispatch = useAppDispatch();

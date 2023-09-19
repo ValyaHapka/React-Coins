@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
+import { changePortfolioModal, removeCoin } from '../../redux/slices/portfolio-slice';
 import close from '../../assets/icons/close-modal.svg';
 
 import styles from './Portfolio.module.scss';
-import { changePortfolioModal, removeCoin } from '../../redux/slices/portfolio-slice';
 
 const Portfolio: React.FC = () => {
   const dispatch = useAppDispatch();
