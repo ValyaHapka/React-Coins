@@ -2,20 +2,20 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Lottie from 'lottie-react';
 
-import Header from '../../components/Header/Header';
+import { Header } from '../../components/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changeAddModal, changePortfolioModal } from '../../redux/slices/portfolio-slice';
 import { fetchCoinsByID } from '../../redux/slices/active-coin-slice';
 import { fetchHistoryByID } from '../../redux/slices/chart-slice';
-import CoinInfo from '../../components/ActiveCoin/CoinInfo';
-import ChartSection from '../../components/ActiveCoin/CoinChart/ChartSection';
+import { CoinInfo } from '../../components/ActiveCoin/CoinInfo';
+import { ChartSection } from '../../components/ActiveCoin/CoinChart/ChartSection';
 import { QueryProps } from '../../interfaces/historyCoin';
 import back from '../../assets/icons/back.svg';
 import Loader from '../../assets/json/loader.json';
 
 import styles from './CoinPage.module.scss';
 
-const CoinPage: React.FC = () => {
+export const CoinPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { chartTime, statusHistory } = useAppSelector((state) => state.history);
   const { statusCoin } = useAppSelector((state) => state.activeCoin);
@@ -82,5 +82,3 @@ const CoinPage: React.FC = () => {
     </>
   );
 };
-
-export default CoinPage;

@@ -2,8 +2,8 @@ import { Provider } from 'react-redux';
 import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import { store } from './redux/store';
-import TablePage from './pages/TablePage/TablePage';
-import CoinPage from './pages/CoinPage/CoinPage';
+import { TablePage } from './pages/TablePage/TablePage';
+import { CoinPage } from './pages/CoinPage/CoinPage';
 
 function App() {
   return (

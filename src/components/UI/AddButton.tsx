@@ -6,7 +6,7 @@ import { addCoins, changeAddModal } from '../../redux/slices/portfolio-slice';
 
 import styles from './AddButton.module.scss';
 
-const AddButton: React.FC<AddCoinProps> = ({ data }) => {
+export const AddButton: React.FC<AddCoinProps> = ({ data }) => {
   const dispatch = useAppDispatch();
 
   const click = () => {
@@ -22,5 +22,3 @@ const AddButton: React.FC<AddCoinProps> = ({ data }) => {
     </button>
   );
 };
-
-export default AddButton;

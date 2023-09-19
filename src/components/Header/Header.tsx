@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-import Portfolio from '../Portfolio/Portfolio';
+import { Portfolio } from '../Portfolio/Portfolio';
 import {
   changeDifference,
   changePortfolioModal,
@@ -11,7 +11,7 @@ import { PortfolioCoin } from '../../interfaces/portfolio';
 
 import styles from './Header.module.scss';
 
-const Header: React.FC = () => {
+export const Header = () => {
   const dispatch = useAppDispatch();
   const { baseItems } = useAppSelector((state) => state.coins);
   const { isPortfolioModalOpen, coins, difference } = useAppSelector((state) => state.portfolio);
@@ -80,5 +80,3 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
-export default Header;

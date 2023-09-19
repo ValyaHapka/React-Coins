@@ -5,7 +5,7 @@ import { TimeButtonProps } from '../../../interfaces/historyCoin';
 
 import styles from './TimeButton.module.scss';
 
-const TimeButton: React.FC<TimeButtonProps> = ({ valueButton, click }) => {
+export const TimeButton: React.FC<TimeButtonProps> = ({ valueButton, click }) => {
   const { chartTime } = useAppSelector((state) => state.history);
 
   return (
@@ -16,5 +16,3 @@ const TimeButton: React.FC<TimeButtonProps> = ({ valueButton, click }) => {
     </button>
   );
 };
-
-export default TimeButton;

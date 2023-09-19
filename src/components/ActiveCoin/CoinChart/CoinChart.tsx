@@ -30,7 +30,7 @@ const options = {
   },
 };
 
-const CoinChart: React.FC<{ data: ChartData[] }> = ({ data }) => {
+export const CoinChart: React.FC<{ data: ChartData[] }> = ({ data }) => {
   const info = {
     labels: data.map((item) => item.time),
     datasets: [
@@ -45,5 +45,3 @@ const CoinChart: React.FC<{ data: ChartData[] }> = ({ data }) => {
 
   return <Line options={options} data={info}></Line>;
 };
-
-export default CoinChart;

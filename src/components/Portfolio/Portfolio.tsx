@@ -6,7 +6,7 @@ import close from '../../assets/icons/close-modal.svg';
 
 import styles from './Portfolio.module.scss';
 
-const Portfolio: React.FC = () => {
+export const Portfolio: React.FC = () => {
   const dispatch = useAppDispatch();
   const { coins } = useAppSelector((state) => state.portfolio);
 
@@ -39,5 +39,3 @@ const Portfolio: React.FC = () => {
     </div>
   );
 };
-
-export default Portfolio;

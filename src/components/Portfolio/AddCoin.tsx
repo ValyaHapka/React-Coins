@@ -3,13 +3,13 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 import close from '../../assets/icons/close-modal.svg';
 import { changeAddModal, chooseCoin } from '../../redux/slices/portfolio-slice';
-import AddButton from '../UI/AddButton';
+import { AddButton } from '../UI/AddButton';
 import { PortfolioCoin } from '../../interfaces/portfolio';
 import { AddCoinProps } from '../../interfaces/addCoin';
 
 import styles from './AddCoins.module.scss';
 
-const AddCoins: React.FC<AddCoinProps> = ({ data }) => {
+export const AddCoins: React.FC<AddCoinProps> = ({ data }) => {
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>('0');
@@ -39,5 +39,3 @@ const AddCoins: React.FC<AddCoinProps> = ({ data }) => {
     </div>
   );
 };
-
-export default AddCoins;

@@ -5,7 +5,7 @@ import { searchByName } from '../../redux/slices/coins-slice';
 
 import styles from './Search.module.scss';
 
-const Search: React.FC = () => {
+export const Search = () => {
   const dispatch = useAppDispatch();
   const searchRef = useRef<HTMLInputElement>(null);
   const [localValue, setLocalValue] = useState('');
@@ -26,5 +26,3 @@ const Search: React.FC = () => {
     </>
   );
 };
-
-export default Search;

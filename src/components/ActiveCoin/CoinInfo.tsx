@@ -1,14 +1,12 @@
-import React from 'react';
-
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changeAddModal } from '../../redux/slices/portfolio-slice';
 
-import AddCoins from '../Portfolio/AddCoin';
+import { AddCoins } from '../Portfolio/AddCoin';
 import { buildLink } from '../../helpers/buildLink';
 
 import styles from '../../pages/CoinPage/CoinPage.module.scss';
 
-const CoinInfo: React.FC = () => {
+export const CoinInfo = () => {
   const dispatch = useAppDispatch();
   const { coin } = useAppSelector((state) => state.activeCoin);
   const { isAddModalOpen } = useAppSelector((state) => state.portfolio);
@@ -47,5 +45,3 @@ const CoinInfo: React.FC = () => {
     </section>
   );
 };
-
-export default CoinInfo;

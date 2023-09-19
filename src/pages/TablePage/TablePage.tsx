@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import Lottie from 'lottie-react';
 
-import Header from '../../components/Header/Header';
-import CoinsList from '../../components/CoinsList/CoinsList';
+import { Header } from '../../components/Header/Header';
+import { CoinsList } from '../../components/CoinsList/CoinsList';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changePage, fetchCoins } from '../../redux/slices/coins-slice';
-import Search from '../../components/Search/Search';
-import Pagination from '../../components/Pagination/Pagination';
+import { Search } from '../../components/Search/Search';
+import { Pagination } from '../../components/Pagination/Pagination';
 import Loader from '../../assets/json/loader.json';
 import {
   addCoinsFromStorage,
@@ -16,7 +16,7 @@ import {
 
 import styles from './TablePage.module.scss';
 
-const TablePage = () => {
+export const TablePage = () => {
   const dispatch = useAppDispatch();
   const { currentPage, status } = useAppSelector((state) => state.coins);
   const { isPortfolioModalOpen, isAddModalOpen, coins, price } = useAppSelector(
@@ -76,5 +76,3 @@ const TablePage = () => {
     </>
   );
 };
-
-export default TablePage;

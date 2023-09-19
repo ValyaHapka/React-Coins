@@ -1,14 +1,12 @@
-import React from 'react';
-
-import CoinChart, { ChartData } from './CoinChart';
+import { CoinChart, ChartData } from './CoinChart';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { changeTime } from '../../../redux/slices/chart-slice';
-import TimeButton from './TimeButton';
+import { TimeButton } from './TimeButton';
 import { ChartTimeEnum } from '../../../interfaces/historyCoin';
 
 import styles from '../../../pages/CoinPage/CoinPage.module.scss';
 
-const ChartSection: React.FC = () => {
+export const ChartSection = () => {
   const dispatch = useAppDispatch();
   const { history, statusHistory, chartTime } = useAppSelector((state) => state.history);
 
@@ -63,5 +61,3 @@ const ChartSection: React.FC = () => {
     </section>
   );
 };
-
-export default ChartSection;

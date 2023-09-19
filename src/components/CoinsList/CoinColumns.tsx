@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { changeSortType, coinsSliceSelector, sortCoins } from '../../redux/slices/coins-slice';
@@ -7,7 +7,7 @@ import sortDesc from '../../assets/icons/sort-desc.svg';
 import sortAsc from '../../assets/icons/sort-asc.svg';
 import { SortTypeEnum } from '../../interfaces/commonInterfaces';
 
-const CoinColumns: React.FC = () => {
+export const CoinColumns = () => {
   const dispatch = useAppDispatch();
   const { sortType } = useAppSelector((state) => coinsSliceSelector(state));
 
@@ -40,5 +40,3 @@ const CoinColumns: React.FC = () => {
     </thead>
   );
 };
-
-export default CoinColumns;

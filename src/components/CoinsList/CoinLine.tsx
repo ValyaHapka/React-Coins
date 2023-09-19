@@ -6,11 +6,11 @@ import { coinsSliceSelector } from '../../redux/slices/coins-slice';
 import { ICoins } from '../../interfaces/coins';
 import { columns } from '../../assets/json/columns';
 import { changeAddModal, chooseCoin } from '../../redux/slices/portfolio-slice';
-import AddCoins from '../Portfolio/AddCoin';
+import { AddCoins } from '../Portfolio/AddCoin';
 import { PortfolioCoin } from '../../interfaces/portfolio';
 import { buildLink } from '../../helpers/buildLink';
 
-const CoinLine: React.FC = () => {
+export const CoinLine = () => {
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((state) => coinsSliceSelector(state));
   const { isAddModalOpen, chosenCoin } = useAppSelector((state) => state.portfolio);
@@ -73,5 +73,3 @@ const CoinLine: React.FC = () => {
     </>
   );
 };
-
-export default CoinLine;
