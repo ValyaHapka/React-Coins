@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Lottie from 'lottie-react';
 
@@ -14,8 +14,9 @@ import back from '../../assets/icons/back.svg';
 import Loader from '../../assets/json/loader.json';
 
 import styles from './CoinPage.module.scss';
+import { fetchCoins } from '../../redux/slices/coins-slice';
 
-export const CoinPage: React.FC = () => {
+export const CoinPage = () => {
   const dispatch = useAppDispatch();
   const { chartTime, statusHistory } = useAppSelector((state) => state.history);
   const { statusCoin } = useAppSelector((state) => state.activeCoin);
@@ -35,6 +36,7 @@ export const CoinPage: React.FC = () => {
 
   useEffect(() => {
     const fetchingData = async () => {
+      dispatch(fetchCoins({ currentPage: 1 }));
       dispatch(fetchCoinsByID(coinID as string));
     };
 
@@ -66,19 +68,25 @@ export const CoinPage: React.FC = () => {
 
   return (
     <>
-      <Header />
-      {(isPortfolioModalOpen || isAddModalOpen) && (
-        <div className={styles.blur} onClick={clickOverlay} />
-      )}
-      <img className={styles.back} src={back} onClick={() => navigate('/')} />
-      {statusCoin === 'loaded' && statusHistory === 'loaded' && (
-        <div className={styles.page}>
-          <CoinInfo />
-          <ChartSection />
-        </div>
+      {statusCoin === 'loaded' && (
+        <>
+          <Header />
+          {(isPortfolioModalOpen || isAddModalOpen) && (
+            <div className={styles.blur} onClick={clickOverlay} />
+          )}
+          <img className={styles.back} src={back} onClick={() => navigate('/')} />
+          {statusCoin === 'loaded' && statusHistory === 'loaded' && (
+            <div className={styles.page}>
+              <CoinInfo />
+              <ChartSection />
+            </div>
+          )}
+          {statusHistory === 'loading' && (
+            <Lottie animationData={Loader} className={styles.loader} />
+          )}
+        </>
       )}
       {statusCoin === 'error' && <span className={styles.error}>There is no such coin :(</span>}
-      {statusHistory === 'loading' && <Lottie animationData={Loader} className={styles.loader} />}
     </>
   );
 };

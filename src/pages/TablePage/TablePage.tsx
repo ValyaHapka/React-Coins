@@ -22,7 +22,6 @@ export const TablePage = () => {
   const { isPortfolioModalOpen, isAddModalOpen, coins, price } = useAppSelector(
     (state) => state.portfolio,
   );
-
   useEffect(() => {
     dispatch(fetchCoins({ currentPage }));
   }, [dispatch, currentPage]);
@@ -39,7 +38,7 @@ export const TablePage = () => {
     const storagePortfolio = JSON.parse(localStorage.getItem('portfolio') as string);
 
     if (coins.length !== 0) {
-      localStorage.setItem('portfolio', JSON.stringify({ coins, price: price.toFixed(2) }));
+      localStorage.setItem('portfolio', JSON.stringify({ coins, price: +price.toFixed(2) }));
     } else if (storagePortfolio) {
       dispatch(addCoinsFromStorage(storagePortfolio.coins));
     }
@@ -54,25 +53,23 @@ export const TablePage = () => {
   };
 
   return (
-    <>
-      {(isPortfolioModalOpen || isAddModalOpen) && (
-        <div className={styles.blur} onClick={clickOverlay} />
+    <div className={styles.coins}>
+      {status === 'loaded' && (
+        <>
+          <Header />
+          {(isPortfolioModalOpen || isAddModalOpen) && (
+            <div className={styles.blur} onClick={clickOverlay} />
+          )}
+          <Search />
+          <CoinsList />
+          <Pagination
+            currentPage={currentPage}
+            onChangePage={(number) => dispatch(changePage(number))}
+          />
+        </>
       )}
-      <div className={styles.coins}>
-        {status === 'loaded' && (
-          <>
-            <Header />
-            <Search />
-            <CoinsList />
-            <Pagination
-              currentPage={currentPage}
-              onChangePage={(number) => dispatch(changePage(number))}
-            />
-          </>
-        )}
 
-        {status === 'loading' && <Lottie animationData={Loader} className={styles.loader} />}
-      </div>
-    </>
+      {status === 'loading' && <Lottie animationData={Loader} className={styles.loader} />}
+    </div>
   );
 };

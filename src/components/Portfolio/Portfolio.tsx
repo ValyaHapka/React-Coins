@@ -17,7 +17,7 @@ export const Portfolio: React.FC = () => {
     <div className={styles.portfolio}>
       <img src={close} onClick={setModal} className={styles.portfolio_close} />
       {coins.length > 0 ? (
-        <>
+        <ul className={styles.portfolio_list}>
           {coins.map((c) => (
             <li className={styles.portfolio_list_element}>
               <div className={styles.portfolio_list_element_info}>
@@ -31,11 +31,10 @@ export const Portfolio: React.FC = () => {
               </div>
             </li>
           ))}
-        </>
+        </ul>
       ) : (
         <h6>Add some coins to your portfolio</h6>
       )}
-      <ul className={styles.portfolio_list}></ul>
     </div>
   );
 };
