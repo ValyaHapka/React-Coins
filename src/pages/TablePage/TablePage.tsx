@@ -4,7 +4,7 @@ import Lottie from 'lottie-react';
 import { Header } from '../../components/Header/Header';
 import { CoinsList } from '../../components/CoinsList/CoinsList';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { changePage, fetchCoins } from '../../redux/slices/coins-slice';
+import { changePage, fetchAllCoins, fetchCoins } from '../../redux/slices/coins-slice';
 import { Search } from '../../components/Search/Search';
 import { Pagination } from '../../components/Pagination/Pagination';
 import Loader from '../../assets/json/loader.json';
@@ -18,11 +18,12 @@ import styles from './TablePage.module.scss';
 
 export const TablePage = () => {
   const dispatch = useAppDispatch();
-  const { currentPage, status } = useAppSelector((state) => state.coins);
+  const { currentPage, status, statusAllCoins } = useAppSelector((state) => state.coins);
   const { isPortfolioModalOpen, isAddModalOpen, coins, price } = useAppSelector(
     (state) => state.portfolio,
   );
   useEffect(() => {
+    dispatch(fetchAllCoins());
     dispatch(fetchCoins({ currentPage }));
   }, [dispatch, currentPage]);
 
@@ -54,7 +55,7 @@ export const TablePage = () => {
 
   return (
     <div className={styles.coins}>
-      {status === 'loaded' && (
+      {status === 'loaded' && statusAllCoins === 'loaded' && (
         <>
           <Header />
           {(isPortfolioModalOpen || isAddModalOpen) && (
@@ -69,7 +70,9 @@ export const TablePage = () => {
         </>
       )}
 
-      {status === 'loading' && <Lottie animationData={Loader} className={styles.loader} />}
+      {(status === 'loading' || statusAllCoins === 'loading') && (
+        <Lottie animationData={Loader} className={styles.loader} />
+      )}
     </div>
   );
 };

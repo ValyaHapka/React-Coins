@@ -21,8 +21,10 @@ export interface QueryCoins {
 
 export interface CoinsState {
   status: Status;
+  statusAllCoins: Status;
   baseItems: ICoins[];
   items: ICoins[];
+  allCoins: ICoins[];
   searchValue: string;
   sortType: SortType;
   currentPage: number;

@@ -17,7 +17,7 @@ import { countPrice } from '../../helpers/countPrice';
 export const Header = () => {
   const dispatch = useAppDispatch();
   const { isPortfolioModalOpen, coins, difference } = useAppSelector((state) => state.portfolio);
-  const { status, baseItems } = useAppSelector((state) => state.coins);
+  const { status, allCoins } = useAppSelector((state) => state.coins);
   const [portfolioPrice, setPortfolioPrice] = useState(0);
 
   const setModal = () => {
@@ -37,9 +37,10 @@ export const Header = () => {
 
       const coinsInPortfolio: PortfolioCoin[] = storagePortfolio.coins.map(
         (coin: PortfolioCoin) => {
-          for (let i = 0; i < baseItems.length; i++) {
-            if (baseItems[i].name === coin.name) {
-              return (coin = { ...coin, price: +baseItems[i].priceUsd });
+          for (let i = 0; i < allCoins.length; i++) {
+            if (allCoins[i].name === coin.name) {
+              coin = { ...coin, price: +allCoins[i].priceUsd };
+              return coin;
             }
           }
         },
@@ -49,9 +50,9 @@ export const Header = () => {
 
       dispatch(changeDifference(newPrice - portfolioPrice));
     }
-  }, [baseItems, dispatch, portfolioPrice, status]);
+  }, [allCoins, dispatch, portfolioPrice, status]);
 
-  const topCoins = baseItems.slice(0, 3);
+  const topCoins = allCoins.slice(0, 3);
 
   return (
     <>

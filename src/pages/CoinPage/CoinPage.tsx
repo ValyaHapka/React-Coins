@@ -18,6 +18,7 @@ import { fetchCoins } from '../../redux/slices/coins-slice';
 
 export const CoinPage = () => {
   const dispatch = useAppDispatch();
+  const { statusAllCoins } = useAppSelector((state) => state.coins);
   const { chartTime, statusHistory } = useAppSelector((state) => state.history);
   const { statusCoin } = useAppSelector((state) => state.activeCoin);
   const { isPortfolioModalOpen, isAddModalOpen } = useAppSelector((state) => state.portfolio);
@@ -68,7 +69,7 @@ export const CoinPage = () => {
 
   return (
     <>
-      {statusCoin === 'loaded' && (
+      {statusCoin === 'loaded' && statusAllCoins === 'loaded' && (
         <>
           <Header />
           {(isPortfolioModalOpen || isAddModalOpen) && (

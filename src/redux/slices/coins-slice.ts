@@ -12,7 +12,8 @@ export const fetchCoins = createAsyncThunk('coins/fetchCoins', async (params: Fe
     if (currentPage === 1) {
       return 0;
     } else {
-      return currentPage * 100;
+      const itemsPerPage = 100;
+      return (currentPage - 1) * itemsPerPage + 1;
     }
   };
 
@@ -21,10 +22,20 @@ export const fetchCoins = createAsyncThunk('coins/fetchCoins', async (params: Fe
   return query.data;
 });
 
+export const fetchAllCoins = createAsyncThunk('coins/fetchAllCoins', async () => {
+  const maxLimit = '2000';
+
+  const query = await AxiosCoins.get<QueryCoins>(`/assets?limit=${maxLimit}`);
+
+  return query.data;
+});
+
 const initialState: CoinsState = {
   status: Status.EMPTY,
+  statusAllCoins: Status.EMPTY,
   baseItems: [],
   items: [],
+  allCoins: [],
   searchValue: '',
   sortType: { type: SortTypeEnum.EMPTY, desc: true },
   currentPage: 1,
@@ -96,6 +107,18 @@ export const coinsSlice = createSlice({
       state.status = Status.ERROR;
       state.baseItems = [];
       state.items = [];
+    });
+    builder.addCase(fetchAllCoins.pending, (state) => {
+      state.statusAllCoins = Status.LOADING;
+      state.allCoins = [];
+    });
+    builder.addCase(fetchAllCoins.fulfilled, (state, action: PayloadAction<QueryCoins>) => {
+      state.statusAllCoins = Status.LOADED;
+      state.allCoins = action.payload.data;
+    });
+    builder.addCase(fetchAllCoins.rejected, (state) => {
+      state.statusAllCoins = Status.ERROR;
+      state.allCoins = [];
     });
   },
 });
